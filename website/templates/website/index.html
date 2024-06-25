@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Audit System</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href={% static 'website/assets/css/main.css' %} />
+		<noscript><link rel="stylesheet" href={% static 'website/assets/css/noscript.css' %} /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href= ' ' class="logo">
+									<span class="symbol"><img src={% static 'website/images/logo.svg'%} alt="" /></span><span class="title">Audit System</span>
+								</a>
+
+							
+						</div>
+					</header>
+
+			
+					<
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<section class="tiles">
+								<article class= "style1">
+									<span class="image">
+										<img src={% static 'website/images/pic01.jpg' %} alt="" />
+									</span>
+									<a href="login">
+										<h2>Login</h2>
+										<div class="content">
+											<p>Login into the system</p>
+										</div>
+									</a>
+								</article>
+                                {% if user.is_authenticated     %}
+								<article class="style2">
+									<span class="image">
+										<img src={% static 'website/images/pic02.jpg' %} alt="" />
+									</span>
+									<a href="home">
+										<h2>Home Page</h2>
+										<div class="content">
+											<p>Project Details</p>
+										</div>
+									</a>
+								</article>
+								<article class="style3">
+									<span class="image">
+										<img src={% static 'website/images/pic03.jpg' %} alt="" />
+									</span>
+									<a href="http://127.0.0.1:8000/home/add_info">
+										<h2>Add Details</h2>
+										<div class="content">
+											<p>Add Details into the database</p>
+										</div>
+									</a>
+								</article>
+								<article class="style4">
+									<span class="image">
+										<img src={% static 'website/images/pic04.jpg' %} alt="" />
+									</span>
+									<a href="http://127.0.0.1:8000/home/search">
+										<h2>Search Details</h2>
+										<div class="content">
+											<p>Search details in the database</p>
+										</div>
+									</a>
+								</article>
+                                <article class="style5 ">
+									<span class="image ">
+										<img src={% static 'website/images/pic05.jpg' %} alt="" />
+									</span>
+									<a href="{% url 'logout'%}">
+										<h2>Logout</h2>
+										<div class="content">
+											<p>Logout of the system</p>
+										</div>
+									</a>
+								</article>
+                                {% endif %}
+							</section>
+						</div>
+					</div>
+
+			
+
+		<!-- Scripts -->
+			<script src={% static 'website/assets/js/jquery.min.js' %}></script>
+			<script src={% static 'website/assets/js/browser.min.js' %}></script>
+			<script src={% static 'website/assets/js/breakpoints.min.js' %}></script>
+			<script src={% static 'website/assets/js/util.js' %}></script>
+			<script src={% static 'website/assets/js/main.js' %}></script>
+
+	</body>
+</html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <br/>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+{% extends 'login_system/base.html'%}
+
+{% block content %}
+    <h1>Borrowed Materials</h1>
+        {% for info in binfo%}
+        <div class="card">
+            <div class="card-header">
+                {{ info }}
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"> {{info.item}}</h5>
+              <p class="card-text">
+               <li>Deadline to Return: {{info.deadline}}</li>
+               <li>Borrowed On: {{info.borrow}}</li>
+                                    </p>
+            </div>
+          </div>
+        
+           
+          
+           
+        
+        {% endfor %}
+
+ 
+{% endblock %}

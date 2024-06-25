@@ -1,0 +1,121 @@
+{% extends 'login_system/base.html'%}
+{% load static %}
+
+{% block content %}
+
+<header id="header">
+		
+    <a href= 'http://127.0.0.1:8000/' class="logo">
+       <span class="symbol"><img src={% static 'website/images/logo.svg'%} alt="" /></span><span class="title">Audit System</span>
+   </a>
+       
+</header>
+
+<div class="card">
+    <div class="card-header">
+        {% if searched %}
+            You searched for {{ searched }}
+
+        {% endif %}
+    </div>
+<div class="card-body">
+<form method = 'POST' action = "{% url 'search' %}">
+    {% csrf_token %}
+    
+        <center>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Searching for Records</label>
+                <input type="search" class="form-control" name="searched">
+            </div>
+        </center>
+        
+        <center>
+            <input type="submit"
+            value = "Search"
+            class="btn btn-lg btn-pill btn-secondary">
+        </center>
+</div>
+</div>
+{% if searched %}
+<br/>
+<table border='1' id='status'>
+    <tr>
+        <th>Name</th>
+        <th>Item</th>
+        <th>Deadline</th>
+        <th>Borrowed On</th>
+        <th>Status</th>
+    </tr>
+    {% for record in records %}
+    <tr>
+        <td>{{ record.name }}</td>
+        <td>{{ record.item }}</td>
+        <td>{{ record.deadline }}</td>
+        <td>{{ record.borrow }}</td>
+        <td class="status"></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<script>
+    function updateStatus() {
+        // Get the current date
+        const currentDate = new Date();
+
+        // Get all the rows in the table except the header row
+        const rows = document.querySelectorAll('#status tr:not(:first-child)');
+
+        rows.forEach(row => {
+            // Get the deadline from the third cell (index 2)
+            const deadlineText = row.cells[2].textContent;
+
+            // Parse the deadline into a Date object
+            const deadline = new Date(deadlineText);
+
+            // Get the status cell (last cell)
+            const statusCell = row.cells[4];
+
+            // Compare dates and set the status
+            if (deadline > currentDate) {
+                statusCell.textContent = 'On time';
+            } else {
+                statusCell.textContent = 'Past Deadline';
+                statusCell.style.color = 'red';
+            }
+        });
+    }
+
+    // Call the function to update the status
+    updateStatus();
+</script>
+
+{% endif %}
+<!--Card
+{% for  record in records %}
+    <div class="card">
+         <div class="card-header">
+            {{ record }}
+        </div>
+        <div class="card-body">
+        <h5 class="card-title"> {{record.item}}</h5>
+        <p class="card-text">
+
+            <li>Deadline to Return: {{record.deadline}}</li>
+            <li>Borrowed On: {{record.borrow}}</li>
+        </p>
+    </div>
+    </div>
+<br/>
+{% endfor %}-->
+
+</form>
+
+
+<br/><br/>
+
+{% endblock %}
+
+
+
+
+
