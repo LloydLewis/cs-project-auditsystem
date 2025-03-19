@@ -1,0 +1,61 @@
+{% extends 'login_system/base.html'%}
+{% load static %}
+
+{% block content %}
+
+<head>
+    <title>Login</title>
+</head>
+
+<header id="header">
+		
+     <a href= 'http://127.0.0.1:8000/' class="logo">
+        <span class="symbol"><img src={% static 'website/images/file.svg'%} alt="" /></span><span class="title">Audit System</span>
+    </a>
+		
+</header>
+
+<center>
+    <h1>Login</h1>
+</center>
+
+{% if messages%}
+    {% for message in messages%}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<form action= "" method = 'POST'>
+    {% csrf_token %}
+
+    <form>
+        <center>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Username</label>
+                <input type="text" class="form-control" name="username">
+            </div>
+        </center>
+        
+        <center>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password">
+            </div>
+        </center>
+        
+        
+      
+        <center>
+            <input type="submit"
+            value = "submit"
+            class="btn btn-lg btn-pill btn-secondary">
+        </center>
+    
+
+</form>
+<br/><br/>
+{% endblock %}
+
