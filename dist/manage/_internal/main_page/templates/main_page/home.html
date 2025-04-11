@@ -1,0 +1,31 @@
+
+{% load static %}
+<html>
+{% block content %}
+    <head>
+        <meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href={% static 'website/assets/css/main.css' %} />
+		<noscript><link rel="stylesheet" href={% static 'website/assets/css/noscript.css' %} /></noscript>
+    </head>
+    <div id="wrapper">
+            <header id="header">
+                <div class="inner">
+    
+                    <!-- Logo -->
+                     <center>
+                        <a href= 'http://127.0.0.1:8000/' class="logo">
+                            <span class="symbol"><img src={% static 'website/images/file.svg'%} alt="" /></span><span class="title">Audit System</span>
+                        </a>
+                     </center>
+
+                     <center>
+                        <h1>Welcome to Our Project</h1>
+                        <h2>Class 12F </h2>
+                        <h2>Team Members: Lloyd Lewis, Vathsal Koyi, Dhyaan Sateesh</h2>
+                    </center>
+   
+                </div>
+            </header>
+    {% endblock %}
+</html>
