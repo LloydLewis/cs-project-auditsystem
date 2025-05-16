@@ -10,4 +10,5 @@ urlpatterns = [
     path('search', views.search, name = 'search'),
     path('', info_list, name='info_list'),
     path('delete_record/<int:record_id>/', delete_record, name='delete_record'),
+    path('ajax/item-search/', views.item_search, name='item_search')
 ]

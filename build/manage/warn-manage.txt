@@ -69,6 +69,7 @@ missing module named django.db.models.UniqueConstraint - imported by django.db.m
 missing module named django.db.models.AutoField - imported by django.db.models (top-level), django.db.models.options (top-level), django.db.models.query (top-level), django.forms.models (delayed), django.db.backends.oracle.operations (top-level)
 missing module named pywatchman - imported by django.utils.autoreload (optional)
 missing module named termios - imported by django.utils.autoreload (optional), getpass (optional), tty (top-level)
+missing module named pandas - imported by main_page.management.commands.import_items (top-level)
 missing module named selenium - imported by django.test.selenium (delayed, conditional)
 missing module named tblib - imported by django.test.runner (optional)
 missing module named ipdb - imported by django.test.runner (optional)

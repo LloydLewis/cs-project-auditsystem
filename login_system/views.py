@@ -22,7 +22,7 @@ def login_user(request): # View to login the user
         else:
             #returns a message if credentials dont match and sends back to login page
 
-            messages.success(request, ('There was an error logging in. Try again'))
+            messages.success(request, ('There was an error logging in'))
             return redirect('login')
     else:
         return render(request, 'login_system/login.html')

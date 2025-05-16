@@ -3,10 +3,10 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 from .models import Info
 from .forms import InfoForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
-
+from main_page.models import Item
 
 def home(request):
     return render(request, 'main_page/home.html')
@@ -54,4 +54,12 @@ def delete_record(request, record_id):
         except Info.DoesNotExist:
             return JsonResponse({'success': False, 'error': 'Record not found'}, status=404)
     return JsonResponse({'success': False, 'error': 'Invalid request method'}, status=400)
+
+
+
+def item_search(request):
+    term = request.GET.get('term', '')
+    items = Item.objects.filter(name__icontains=term)[:10]
+    results = [{'id': item.id, 'text': item.name} for item in items]
+    return JsonResponse({'results': results})
 
