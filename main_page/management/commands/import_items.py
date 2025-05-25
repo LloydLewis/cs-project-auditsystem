@@ -11,18 +11,33 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         filepath = kwargs['filepath']
 
-        # Read from second row (row index 1) and drop unnamed columns
         df = pd.read_excel(filepath, header=1)
         df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+        df.columns = df.columns.str.strip().str.upper()
 
-        column = 'NAME OF THE PRODUCT'
-        if column not in df.columns:
-            self.stdout.write(self.style.ERROR(f"Column '{column}' not found. Available columns: {df.columns.tolist()}"))
+        required_columns = ['NAME OF THE PRODUCT', 'CATEGORY', 'QUANTITY', 'REMARKS']
+        missing = [col for col in required_columns if col not in df.columns]
+        if missing:
+            self.stdout.write(self.style.ERROR(f"Missing columns: {missing}"))
             return
 
-        for name in df[column].dropna().unique():
-            item, created = Item.objects.get_or_create(name=name.strip())
+        for _, row in df.iterrows():
+            name = str(row['NAME OF THE PRODUCT']).strip()
+            category = str(row['CATEGORY']).strip()
+            quantity = int(row['QUANTITY']) if not pd.isna(row['QUANTITY']) else 0
+            remarks = str(row['REMARKS']).strip()
+
+            item, created = Item.objects.update_or_create(
+                name=name,
+                defaults={
+                    'category': category,
+                    'quantity': quantity,
+                    'remarks': remarks
+                }
+            )
+
             if created:
-                self.stdout.write(self.style.SUCCESS(f"Added: {name}"))
+                self.stdout.write(self.style.SUCCESS(f"✅ Created: {name}"))
             else:
-                self.stdout.write(f"Already exists: {name}")
+                self.stdout.write(self.style.WARNING(f"🌀 Updated: {name}"))
+

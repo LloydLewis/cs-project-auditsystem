@@ -2,7 +2,10 @@ from django.db import models
 
 
 class Item(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=255)
+    category = models.CharField(max_length=255, blank=True, null=True)
+    quantity = models.IntegerField(default=0)
+    remarks = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name

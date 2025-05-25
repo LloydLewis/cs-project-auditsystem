@@ -9,7 +9,7 @@ a = Analysis(
         ('website/templates', 'website/templates'),
         ('main_page/templates', 'main_page/templates'),
         ('login_system/templates', 'login_system/templates'),
-        ('static', 'static')
+        ('static', 'static'),
     ],
     hiddenimports=[],
     hookspath=[],

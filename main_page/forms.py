@@ -22,3 +22,14 @@ class InfoForm(forms.ModelForm):
             'deadline': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'borrow': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
+        
+class ItemForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = ['name', 'category', 'quantity', 'remarks']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'category': forms.TextInput(attrs={'class': 'form-control'}),
+            'quantity': forms.NumberInput(attrs={'class': 'form-control'}),
+            'remarks': forms.Textarea(attrs={'class': 'form-control', 'rows': 1}),
+        }

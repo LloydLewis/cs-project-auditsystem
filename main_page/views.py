@@ -1,12 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
-from .models import Info
-from .forms import InfoForm
+from .models import Info, Item
+from .forms import InfoForm, ItemForm
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 from main_page.models import Item
+from django.forms import modelformset_factory
 
 def home(request):
     return render(request, 'main_page/home.html')
@@ -63,3 +65,34 @@ def item_search(request):
     results = [{'id': item.id, 'text': item.name} for item in items]
     return JsonResponse({'results': results})
 
+def manage_items(request):
+    items = Item.objects.all()
+    return render(request, 'main_page/manage_items.html', {'items': items})
+
+@csrf_exempt
+def add_item(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        category = request.POST.get('category')
+        quantity = request.POST.get('quantity') or 0
+        remarks = request.POST.get('remarks') or ''
+        item = Item.objects.create(name=name, category=category, quantity=quantity, remarks=remarks)
+        return JsonResponse({'id': item.id, 'name': item.name})
+
+@csrf_exempt
+def edit_item(request, item_id):
+    if request.method == 'POST':
+        item = get_object_or_404(Item, id=item_id)
+        item.name = request.POST.get('name')
+        item.category = request.POST.get('category')
+        item.quantity = request.POST.get('quantity') or 0
+        item.remarks = request.POST.get('remarks') or ''
+        item.save()
+        return JsonResponse({'success': True})
+
+@csrf_exempt
+def delete_item(request, item_id):
+    if request.method == 'POST':
+        item = get_object_or_404(Item, id=item_id)
+        item.delete()
+        return JsonResponse({'success': True})
